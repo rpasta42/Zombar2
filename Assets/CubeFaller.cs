@@ -4,6 +4,7 @@ using System.Collections;
 public class CubeFaller : MonoBehaviour {
 
    public int frames_per_spawn;
+   public bool disabled;
    private int curr_frame;
 
 	// Use this for initialization
@@ -33,11 +34,11 @@ public class CubeFaller : MonoBehaviour {
       var c = new Color(red, green, blue, 0);
       rend.material.SetColor("_Color", c);
       Rigidbody rb = cube.AddComponent<Rigidbody>();
-
    }
 
 	// Update is called once per frame
 	void Update () {
+      if (disabled) return;
       if (curr_frame++ > frames_per_spawn) {
          spawnCube();
          curr_frame = 0;

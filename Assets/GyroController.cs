@@ -7,7 +7,8 @@ public class GyroController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+      Input.location.Start();
+      Input.compass.enabled = true;
 	}
 
 	// Update is called once per frame
@@ -19,6 +20,9 @@ public class GyroController : MonoBehaviour {
       var x = Mathf.LerpAngle(transform.eulerAngles.x, accelRot.x, 0.1f);
       var y = Mathf.LerpAngle(transform.eulerAngles.y, accelRot.y, 0.1f);
 
-      transform.eulerAngles = new Vector3(x, y, transform.eulerAngles.z);
+      //transform.eulerAngles = new Vector3(x, y, transform.eulerAngles.z);
+      var heading1 = -Input.compass.magneticHeading;
+      var heading2 = -Input.compass.trueHeading;
+      transform.rotation = Quaternion.Euler(0, heading2, 0);
 	}
 }
