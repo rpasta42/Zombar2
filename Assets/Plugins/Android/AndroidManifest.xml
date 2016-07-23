@@ -12,6 +12,7 @@
         android:xlargeScreens="true"
         android:anyDensity="true"/>
     <use-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
 		android:theme="@android:style/Theme.NoTitleBar.Fullscreen"

@@ -26,6 +26,10 @@ public class CompassSwag : MonoBehaviour {
 
       rb.AddForce(forward);
       //Quaternion.Euler(0, -north, 0);
-
+      /*//transform.eulerAngles = new Vector3(x, y, transform.eulerAngles.z);
+      var heading1 = -Input.compass.magneticHeading;
+      var heading2 = -Input.compass.trueHeading;
+      transform.rotation = Quaternion.Euler(0, heading2, 0);
+      */
 	}
 }

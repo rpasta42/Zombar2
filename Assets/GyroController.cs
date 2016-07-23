@@ -20,9 +20,10 @@ public class GyroController : MonoBehaviour {
       var x = Mathf.LerpAngle(transform.eulerAngles.x, accelRot.x, 0.1f);
       var y = Mathf.LerpAngle(transform.eulerAngles.y, accelRot.y, 0.1f);
 
-      //transform.eulerAngles = new Vector3(x, y, transform.eulerAngles.z);
+      //TODO: good compass, just lerp it
+      /*//transform.eulerAngles = new Vector3(x, y, transform.eulerAngles.z);
       var heading1 = -Input.compass.magneticHeading;
       var heading2 = -Input.compass.trueHeading;
-      transform.rotation = Quaternion.Euler(0, heading2, 0);
+      transform.rotation = Quaternion.Euler(0, heading2, 0);*/
 	}
 }
