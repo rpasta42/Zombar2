@@ -22,5 +22,6 @@
 - [ ] decide what happens if you die
 
 V2 PvP
+- [ ] party-only or world mode (for people sketching about getting robbed based on GPS)
 - [ ] PvP mode, snipers, hiding, camouflage 
 - [ ] compass based, rotation
