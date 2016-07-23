@@ -1,5 +1,6 @@
 - [ ] World divided into 100m x 100m squares (or smaller area)
 - [ ] log-in server picks spawn square
+- [ ] write in UnityNetworkManager/Python/Rust/Node/SchemeScript. Decide UDP/TCP/WebSocket, etc, etc.
 - [ ] Each square range is a temporary "area session worker" 
 	- [ ] each "area session worker" is stored on a server
 	- [ ] each server has many "area session workers". Try to divide them evenly (serverAverage = 0; foreach (x in AreaSessionWorker) serverAverage += x.numPlayers)
@@ -25,3 +26,7 @@ V2 PvP
 - [ ] party-only or world mode (for people sketching about getting robbed based on GPS)
 - [ ] PvP mode, snipers, hiding, camouflage 
 - [ ] compass based, rotation
+
+V3 Framework
+- [ ] Unity/Android/etc framework for doing anything sensor oriented that combines with graphics/maps/massiveMultiplayer/statisticalData/etc.
+
