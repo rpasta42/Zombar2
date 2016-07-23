@@ -5,7 +5,8 @@
 	- [ ] each server has many "area session workers". Try to divide them evenly (serverAverage = 0; foreach (x in AreaSessionWorker) serverAverage += x.numPlayers)
 	- [ ] try to store "area session workers" based on physical amount of intersections (squares that are touching each other)
 	- [ ] also keep track of people moving between areas, and where the number is high, keep squares on same server (if lots of back-forth traffic, store on same physical server)
-
+- [ ] square seams
+	- [ ] neighboring squares share information for the visible range (both servers sync status & position of players on each other's border)
 - [ ] Each Player NetworkSync rotation of players on same square (if distance is visible)
 	- [ ] Have ability to disable sharing your location
 
@@ -20,6 +21,6 @@
 - [ ] make hunting parties
 - [ ] decide what happens if you die
 
-V2
+V2 PvP
 - [ ] PvP mode, snipers, hiding, camouflage 
-
+- [ ] compass based, rotation
