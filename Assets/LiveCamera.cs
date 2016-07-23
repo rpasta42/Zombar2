@@ -2,39 +2,13 @@
 using System.Collections;
 
 public class LiveCamera : MonoBehaviour {
-
-   void getPermission() {
-      if (ContextCompat.checkSelfPermission(thisActivity,Manifest.permission.READ_CONTACTS)
-              != PackageManager.PERMISSION_GRANTED) {
-           if (ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,
-                  Manifest.permission.READ_CONTACTS)) {
-
-              // Show an expanation to the user *asynchronously* -- don't block
-              // this thread waiting for the user's response! After the user
-              // sees the explanation, try again to request the permission.
-
-          } else {
-
-              // No explanation needed, we can request the permission.
-
-              ActivityCompat.requestPermissions(thisActivity,
-                      new String[]{Manifest.permission.READ_CONTACTS},
-                      MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-              // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-              // app-defined int constant. The callback method gets the
-              // result of the request.
-          }
-      }
-
-   }
+   public bool isMobile;
 
    // Use this for initialization
    IEnumerator Start () {
-      /*yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
+      yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
       if (!Application.HasUserAuthorization(UserAuthorization.WebCam))
-         yield return false;*/
-
+         yield return false;
 
       WebCamDevice[] devices = WebCamTexture.devices;
 
@@ -57,9 +31,17 @@ public class LiveCamera : MonoBehaviour {
       WebCamTexture cam = new WebCamTexture(camToUse); //(480, 480); //WebCamTexture();
       var m = plane.GetComponent<Renderer>().material;
       m.mainTexture = cam;
-      var c = m.color;
-      m.color = new Color(c.r, c.g, c.b, 0.4f);
+      //var c = m.color;
+      //m.color = new Color(c.r, c.g, c.b, 0.3f);
       cam.Play();
+
+      if (isMobile) {
+         var a = transform.eulerAngles;
+         transform.eulerAngles = new Vector3(0.0f, a.y, a.z);
+         //transform.localScale = new Vector3(11.5f, transform.localScale.y, 23.0f);
+      }
+
+      yield return true;
    }
 
 	// Update is called once per frame
