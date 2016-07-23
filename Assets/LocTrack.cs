@@ -59,7 +59,14 @@ public class LocTrack : MonoBehaviour {
       var yDiff = firstLoc.longitude - last.longitude;
 
       GameObject cam = GameObject.Find("Main Camera");
-      cam.transform.position = new Vector3(100*xDiff, 0.0f, 100*yDiff);
+      var locScale = 100000;
+      //500000; //500,000 a little too much
+      //100000; //100,000 kinda good
+      //10000; //10,000 >
+      //1000; //1,000 >
+      //1000000; //1,000,000; <
+      //10000000; //10,000,000 >
+      cam.transform.position = new Vector3(locScale*xDiff, 0.0f, locScale*yDiff);
    }
 
 	// Update is called once per frame
