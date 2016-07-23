@@ -23,10 +23,15 @@ public class GyroController : MonoBehaviour {
       var accelRot = new Vector3(Input.acceleration.y*50.0f + 20.0f,
                                  -Input.acceleration.x*50.0f, 0.0f); //Input.acceleration.z*10);
 
-      while (accelRot.x < 0)
+
+
+      var x = Mathf.LerpAngle(transform.eulerAngles.x, accelRot.x, 0.1f);
+      var y = Mathf.LerpAngle(transform.eulerAngles.y, accelRot.y, 0.1f);
+      transform.eulerAngles = new Vector3(x, y, transform.eulerAngles.z);
+      /*while (accelRot.x < 0)
          accelRot.x = 360 + accelRot.x;
       while (accelRot.y < 0)
-         accelRot.y = 360 + accelRot.y;
+         accelRot.y = 360 + accelRot.y;*/
 
       /*var tmpPrevRot = accelRot;
       if (prevRot != null && prevPrevRot != null && prevPrevPrevRot != null) {
@@ -37,10 +42,10 @@ public class GyroController : MonoBehaviour {
       prevPrevRot = prevRot;
       prevRot = tmpPrevRot;*/
 
-      Vector3 currRot = transform.eulerAngles;
+      /*Vector3 currRot = transform.eulerAngles;
       accelRot.x = Mathf.SmoothDamp(currRot.x, accelRot.x, ref camVelX, 0.3f);
       accelRot.y = Mathf.SmoothDamp(currRot.y, accelRot.y, ref camVelY, 0.3f);
-      transform.eulerAngles = accelRot;
+      transform.eulerAngles = accelRot;*/
 
       /*if (Mathf.Abs(accelRot.x - currRot.x) > ignoreSmallRot) {
          currRot.x = accelRot.x; //(currRot.x + accelRot.x)/2.0f;
