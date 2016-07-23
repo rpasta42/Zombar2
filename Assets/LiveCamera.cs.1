@@ -1,0 +1,18 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class LiveCamera : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+      GameObject plane = GameObject.Find("VidPlane");
+      WebCamTexture cam = new WebCamTexture();
+      plane.renderer.material.mainTexture = cam;
+      cam.Play();
+	}
+
+	// Update is called once per frame
+	void Update () {
+
+	}
+}
