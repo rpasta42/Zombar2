@@ -5,7 +5,7 @@ public class LiveCamera : MonoBehaviour {
    public bool isMobile;
 
    // Use this for initialization
-   IEnumerator Start () {
+   IEnumerator Start() {
       yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
       if (!Application.HasUserAuthorization(UserAuthorization.WebCam))
          yield return false;

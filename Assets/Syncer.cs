@@ -46,7 +46,6 @@ public class Syncer : MonoBehaviour {
 			tracker.StartGyro();
 	}
 
-
 	void LocationUpdate() {
 		var first = tracker.firstLocation;
 		var current = tracker.UpdateGps();
@@ -79,9 +78,11 @@ public class Syncer : MonoBehaviour {
 		var c = tracker.UpdateCompass();
 
 		//transform.rotation = Quaternion.Euler(0, tracker.compassHeading1, 0);
-		compassObject.transform.eulerAngles = c;
+		//transform.localEulerAngles = c;
+		//compassObject.transform.eulerAngles = c;
+		//compassObject.transform.localEulerAngles = c; //why doesn't this work?
+		//compassObject.transform.rotation = Quaternion.Euler(0, tracker.compassHeading1, 0);
 	}
-
 
 	// Update is called once per frame
 	void Update () {
@@ -95,9 +96,7 @@ public class Syncer : MonoBehaviour {
 		}
 		if (gyroFrameCounter++ > gyroNumFramesToUpdate && gyroEnabled) {
 			gyroFrameCounter = 0;
-			gyroUpdate();
+			/////////////////////////////////////////////////////////////////////////////////////////////////////gyroUpdate();
 		}
-
-
 	}
 }

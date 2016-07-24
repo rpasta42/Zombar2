@@ -89,8 +89,8 @@ public class Trackers : MonoBehaviour {
 		Input.compass.enabled = false;
 	}
 	public Vector3 UpdateCompass() {
-		compassHeading1 = Input.compass.magneticHeading;
-		compassHeading2 = Input.compass.trueHeading;
+		compassHeading1 = -Input.compass.magneticHeading;
+		compassHeading2 = -Input.compass.trueHeading;
 
 		compassRotation = Quaternion.Euler(0, compassHeading2, 0).eulerAngles;
 		return compassRotation;
