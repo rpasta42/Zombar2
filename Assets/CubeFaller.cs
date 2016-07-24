@@ -11,12 +11,11 @@ public class CubeFaller : MonoBehaviour {
 	void Start () {
       curr_frame = 0;
 
-      GameObject fall_location = GameObject.Find("Cube Ground");
+      GameObject fall_location = GameObject.Find("Cube Faller Ground");
       var rend = fall_location.GetComponent<Renderer>();
       var c = rend.material.color;
-      rend.material.color = new Color(c.r, c.g, c.b, 0.30f);//new Color(0.0f, 0.0f, 0.0f, 0.0f);
+      rend.material.color = new Color(c.r, c.g, c.b, 0.30f); //new Color(0.0f, 0.0f, 0.0f, 0.0f);
 	}
-
 
    void spawnCube() {
       var x = Random.Range(-6.0f, 10.0f);

@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//GPS
-//multiply by 100,000 for displaying location
+//TODO: store isGpsEnabled isCompassEnabled isGyroEnabled, and if they
+//are, have option to automatically update them in Update() for every frame
+//GPS: multiply by 100,000 for displaying location
 
 
 public class Trackers : MonoBehaviour {
 	public delegate void OnError(int level, string text);
+	public OnError onError;
 
 	//GPS
 	//0 = success, 1 = disabledByUser, 2 = timedOut, 3 = noLocationInitFail
-	public delegate void OnGpsInitFinish(int NavMeshPathStatus);
-
-	public OnError onError;
+	public delegate void OnGpsInitFinish(int status);
 	public OnGpsInitFinish onGpsInitFinish;
 
 	public LocationInfo firstLocation;
@@ -39,7 +39,7 @@ public class Trackers : MonoBehaviour {
 	//GPS
 	IEnumerator _StartGpsHelper(int maxWait, float desiredAccuracyInMeters, float updateDistanceInMeters) {
 		if (!Input.location.isEnabledByUser) {//check if location service enabled
-			OnGpsInitFinish(1);
+			onGpsInitFinish(1);
 			yield break;
 		}
 
@@ -66,45 +66,44 @@ public class Trackers : MonoBehaviour {
 				  l.horizontalAccuracy + " " + l.timestamp);
 		
 	}
-	void StartGps(int maxWait = 20, float desiredAccuracyInMeters = 10f, float updateDistanceInMeters = 10f) {
-		_StartGpsHelper(maxWait, desiredAccuracyInMeters, updateDistanceInMeters);
+	public void StartGps(int maxWait = 20, float desiredAccuracyInMeters = 10f, float updateDistanceInMeters = 10f) {
+		StartCoroutine(_StartGpsHelper(maxWait, desiredAccuracyInMeters, updateDistanceInMeters));
 	}
-	LocationInfo UpdateGps() {
+	public LocationInfo UpdateGps() {
 		currentLocation = Input.location.lastData;
 		return currentLocation;
 	}
-	void StopGps() {
+	public void StopGps() {
 		lastLocation = UpdateGps();
 		Input.location.Stop();
 	}
 	//END GPS
 
 	//COMPASS
-	void StartCompass() { //TODO: errors
+	public void StartCompass() { //TODO: errors
 		Input.compass.enabled = true; //TODO: might need Location too?
 		firstCompassRotation = UpdateCompass();
 	}
-	void StopCompass() {
+	public void StopCompass() {
 		lastCompassRotation = UpdateCompass();
 		Input.compass.enabled = false;
 	}
-	Vector3 UpdateCompass() {
+	public Vector3 UpdateCompass() {
 		compassHeading1 = Input.compass.magneticHeading;
 		compassHeading2 = Input.compass.trueHeading;
 
-		compassRotation = Quaternion.Euler(0, compassHeading2, 0);
+		compassRotation = Quaternion.Euler(0, compassHeading2, 0).eulerAngles;
 		return compassRotation;
 	}
 	//END COMPASS
 
-	void StartGyro() {}
-	void StopGyro() {}
-	Vector3 UpdateGyro() {
+	public void StartGyro() {}
+	public void StopGyro() {}
+	public Vector3 UpdateGyro() {
 		gyro = Input.acceleration;
 		return gyro;
 	}
 
 	// Update is called once per frame
-	void Update () {
-	}
+	void Update () {}
 }
