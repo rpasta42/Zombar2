@@ -8,6 +8,7 @@ public class Syncer : MonoBehaviour {
 
 	public GameObject mainPlayerCamera;
 	public GameObject compassObject;
+	public GameObject gpsObject;
 
 	private Trackers tracker;
 
@@ -25,7 +26,7 @@ public class Syncer : MonoBehaviour {
 	private int gyroFrameCounter;
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		goodGps = false;
 		compassFrameCounter = gpsFrameCounter = gyroFrameCounter = 0;
 
@@ -34,14 +35,14 @@ public class Syncer : MonoBehaviour {
 		tracker.onError = (int level, string text) => {};
 
 		tracker.onGpsInitFinish = (int status) => {
-			if (status == 0)
-				goodGps = true;
+			if (status == 0) goodGps = true;
 		};
+		//goodGps = true;
 
 		if (compassEnabled)
 			tracker.StartCompass();
 		if (gpsEnabled)
-			tracker.StartGps();
+			tracker.StartGps(20, 0.1f, 0.1f); //1f, 1f);
 		if (gyroEnabled)
 			tracker.StartGyro();
 	}
@@ -58,8 +59,9 @@ public class Syncer : MonoBehaviour {
 		//100,000 = default, ok-ish
 		//50,000 = current test
 		//GameObject cam = GameObject.Find("Main Camera");
-		var gpsScale = 50000;
-		mainPlayerCamera.transform.position = new Vector3(gpsScale * xDiff, 0.0f, gpsScale * yDiff);
+		var gpsScale = 50000; //100000; //200000; //50000;
+		//mainPlayerCamera.transform.position = new Vector3(gpsScale * xDiff, 0.0f, gpsScale * yDiff);
+		gpsObject.transform.position = new Vector3(gpsScale * xDiff, 0.0f, gpsScale * yDiff);
 	}
 
 	void gyroUpdate() {
@@ -81,7 +83,7 @@ public class Syncer : MonoBehaviour {
 		//transform.localEulerAngles = c;
 		//compassObject.transform.eulerAngles = c;
 		//compassObject.transform.localEulerAngles = c; //why doesn't this work?
-		//compassObject.transform.rotation = Quaternion.Euler(0, tracker.compassHeading1, 0);
+		compassObject.transform.rotation = Quaternion.Euler(0, tracker.compassHeading2+90, 90);
 	}
 
 	// Update is called once per frame
@@ -96,7 +98,7 @@ public class Syncer : MonoBehaviour {
 		}
 		if (gyroFrameCounter++ > gyroNumFramesToUpdate && gyroEnabled) {
 			gyroFrameCounter = 0;
-			/////////////////////////////////////////////////////////////////////////////////////////////////////gyroUpdate();
+			gyroUpdate();
 		}
 	}
 }

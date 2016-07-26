@@ -64,6 +64,7 @@ public class Trackers : MonoBehaviour {
 		var l = firstLocation = UpdateGps();
 		Debug.Log("Location: " + l.latitude + " " + l.longitude + " " + l.altitude +
 				  l.horizontalAccuracy + " " + l.timestamp);
+		onGpsInitFinish(0);
 		
 	}
 	public void StartGps(int maxWait = 20, float desiredAccuracyInMeters = 10f, float updateDistanceInMeters = 10f) {
